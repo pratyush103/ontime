@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      =  "file:./dev.db" //env("DATABASE_URL")
+}
+
+model Professor {
+  id         Int        @id @default(autoincrement())
+  name       String
+  department String
+  isHOD      Boolean
+  username   String     @unique
+  password   String
+  divisions  ProfessorDivision[]
+}
+
+model Division {
+  id         Int         @id @default(autoincrement())
+  name       String      @unique // e.g., Div A, Div B
+  students   Student[]
+  professors ProfessorDivision[]
+}
+
+model ProfessorDivision {
+  professorId Int
+  divisionId  Int
+  professor   Professor @relation(fields: [professorId], references: [id])
+  division    Division  @relation(fields: [divisionId], references: [id])
+
+  @@id([professorId, divisionId])
+}
+
+model Student {
+  id         Int         @id @default(autoincrement())
+  rollNumber Int         @unique
+  name       String
+  division   Division     @relation(fields: [divisionId], references: [id])
+  divisionId Int
+  attendance Attendance[]
+}
+
+model Attendance {
+  id         Int       @id @default(autoincrement())
+  date       DateTime
+  status     String    @default("Absent") // Present or Absent
+  student    Student   @relation(fields: [studentId], references: [id])
+  studentId  Int
+}
