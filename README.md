@@ -1,8 +1,56 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Project Description
+
+The Attendance Management System is a web application designed to help educational institutions manage attendance records for students and professors. The system provides functionalities for professors to mark attendance, view attendance reports, and manage student records. It also includes authentication and authorization features to ensure secure access to the system.
+
+### Key Features
+
+- **Authentication**: Professors can log in to the system using their credentials.
+- **Student Management**: Professors can add, view, and delete student records.
+- **Attendance Management**: Professors can mark attendance for students, view attendance records, and generate attendance reports.
+- **Division Management**: Professors can view and manage divisions, including the students and professors assigned to each division.
+- **Dashboard**: Professors can view a summary of their divisions, including the number of students and attendance status.
+
+
+
+## Technology Used
+
+- **Next.js**: A React framework for building server-side rendered and statically generated web applications.
+- **React**: A JavaScript library for building user interfaces.
+- **Prisma**: An ORM (Object-Relational Mapping) tool for database management.
+- **Tailwind CSS**: A utility-first CSS framework for styling.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **JWT (JSON Web Tokens)**: A standard for creating access tokens that can be used for authentication.
+- **bcrypt**: A library for hashing passwords to securely store them in the database.
+- **SQLite**: A lightweight database engine used for local development.
+
 ## Getting Started
 
-First, run the development server:
+First, clone the repository:
+
+```bash
+git clone https://github.com/your-username/attendance-management-system.git
+cd attendance-management-system
+```
+
+Install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Set up the database:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +58,7 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
