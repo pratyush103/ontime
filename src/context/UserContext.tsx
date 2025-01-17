@@ -22,23 +22,28 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const id = localStorage.getItem('id');
-    if (token && id) {
-      const username = localStorage.getItem('username');
-      setUser({ username: username || '', token, id: parseInt(id), isHOD: false });
-    }
+    const fetchUserData = async () => {
+      const token = localStorage.getItem('token');
+      const id = localStorage.getItem('id');
+      if (token && id) {
+        const response = await axios.get(`/api/professors/${id}`);
+        const isHOD = response.data.professor.isHOD;
+        const username = localStorage.getItem('username');
+        setUser({ username: username || '', token, id: parseInt(id), isHOD });
+      }
+    };
+    fetchUserData();
   }, []);
 
   const login = async (username: string, password: string) => {
     try {
       const response = await axios.post('/api/auth/login', { username, password });
-      const { token, id } = response.data;
+      const { token, id, isHOD } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
       localStorage.setItem('id', id.toString());
-      setUser({ username, token, id, isHOD: false });
-      router.push('/');
+      setUser({ username, token, id, isHOD });
+      router.push('/dashboard');
     } catch (error) {
       console.error('Login failed', error);
     }
@@ -49,7 +54,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem('username');
     localStorage.removeItem('id');
     setUser(null);
-    router.push('/login');
+    router.push('/');
   };
 
   return (

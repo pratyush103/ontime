@@ -51,23 +51,23 @@ const DivisionPage = () => {
     }
   }, [divisionId]);
 
-  useEffect(() => {
-    async function fetchProfessor() {
-      try {
-        if (!user) return;
-        const response = await axios.get(`/api/professors/${user.id}`);
-        if (response.data.professor.isHOD) {
-          user.isHOD = true;
-        }
-      } catch (error) {
-        console.error('Error fetching professor details', error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchProfessor() {
+  //     try {
+  //       if (!user) return;
+  //       const response = await axios.get(`/api/professors/${user.id}`);
+  //       if (response.data.professor.isHOD) {
+  //         user.isHOD = true;
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching professor details', error);
+  //     }
+  //   }
 
-    if (user?.id) {
-      fetchProfessor();
-    }
-  }, [user]);
+  //   if (user?.id) {
+  //     fetchProfessor();
+  //   }
+  // }, [user]);
 
   const fetchDivision = async () => {
     try {

@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export default async function register(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { username, password, name, department, isHOD, divisionIds } = req.body;
+    const { username, password, name, department, isHOD } = req.body;
 
     if (!username || !password) {
       return res.status(400).json({ success: false, message: 'Username and password are required' });
@@ -29,13 +29,6 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
         name: name,
         department,
         isHOD,
-        divisions: {
-          create: divisionIds.map((divisionId: number) => ({
-            division: {
-              connect: { id: divisionId },
-            },
-          })),
-        },
       },
     });
 

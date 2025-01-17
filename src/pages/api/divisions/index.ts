@@ -32,7 +32,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return res.status(404).json({ success: false, message: 'Division not found' });
         }
         res.status(200).json({ success: true, division });
-      } else {
+      } 
+      
+      else {
         const divisions = await prisma.division.findMany({
           include: { students: true },
         });
