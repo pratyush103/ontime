@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const endOfDay = new Date(today.setHours(23, 59, 59, 999));
 
     const divisionData = await Promise.all(
-      divisions.map(async (division) => {
+      divisions.map(async (division: { id: number; name: string; students: { id: number; name: string; rollNumber: number; divisionId: number; }[] }) => {
       const attendanceTaken = await prisma.attendance.findFirst({
         where: {
         date: {
