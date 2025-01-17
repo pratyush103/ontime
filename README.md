@@ -34,19 +34,17 @@ git clone https://github.com/your-username/attendance-management-system.git
 cd attendance-management-system
 ```
 
-Install the dependencies:
-
+Install the dependencies: 
+Note: This Project Uses pnpm 
 ```bash
-npm install
-# or
-yarn install
-# or
+npm install -g pnpm
 pnpm install
 ```
 
 Set up the database:
 
 ```bash
+npx prisma generate
 npx prisma migrate dev --name init
 ```
 
@@ -54,8 +52,6 @@ Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 # or
 pnpm dev
 ```
