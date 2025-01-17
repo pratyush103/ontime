@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     const summary = await Promise.all(
-      attendanceSummary.map(async (record) => {
+      attendanceSummary.map(async (record: { studentId: number; _count: { status: number } }) => {
         const student = await prisma.student.findUnique({
           where: { id: record.studentId },
           select: { name: true },
