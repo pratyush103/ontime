@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { UserContext } from '../../context/UserContext';
 import styles from './login.module.css';
+import Link from 'next/link';
 
 export default function Register() {
-  const [divisions, setDivisions] = useState<{ id: number; name: string }[]>([]);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     name: '',
     department: '',
     isHOD: false,
-    divisionIds: [] as number[],
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -25,26 +24,9 @@ export default function Register() {
   }
   const { login } = userContext;
 
-  useEffect(() => {
-    async function fetchDivisions() {
-      const response = await axios.get('/api/divisions');
-      setDivisions(response.data.divisions);
-    }
-    fetchDivisions();
-  }, []);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    if (type === 'checkbox' && name === 'divisionIds') {
-      setFormData((prev) => ({
-        ...prev,
-        divisionIds: checked
-          ? [...prev.divisionIds, Number(value)]
-          : prev.divisionIds.filter((id) => id !== Number(value)),
-      }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -170,31 +152,6 @@ export default function Register() {
                   <label className="form-check-label" htmlFor="isHOD">Head of Department</label>
                 </div>
 
-                <div className="mb-4">
-                  <label className="form-label fw-bold mb-2">Select Divisions</label>
-                  <div className="row g-2">
-                    {divisions.map((division) => (
-                      <div key={division.id} className="col-md-6">
-                        <div className="form-check">
-                          <input
-                            type="checkbox"
-                            className="form-check-input"
-                            id={`division-${division.id}`}
-                            name="divisionIds"
-                            value={division.id}
-                            checked={formData.divisionIds.includes(division.id)}
-                            onChange={handleChange}
-                            disabled={isLoading}
-                          />
-                          <label className="form-check-label" htmlFor={`division-${division.id}`}>
-                            {division.name}
-                          </label>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 <button
                   type="submit"
                   className="btn btn-primary w-100 py-3 mb-3"
@@ -209,6 +166,15 @@ export default function Register() {
                     'Create Account'
                   )}
                 </button>
+
+                <div className="text-center">
+                  <p className="text-muted mb-0">
+                    Already have an account?{' '}
+                    <Link href="/auth/login" className="text-primary text-decoration-none">
+                      Login here
+                    </Link>
+                  </p>
+                </div>
               </form>
             </div>
           </div>

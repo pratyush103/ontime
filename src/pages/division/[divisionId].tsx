@@ -51,23 +51,23 @@ const DivisionPage = () => {
     }
   }, [divisionId]);
 
-  useEffect(() => {
-    async function fetchProfessor() {
-      try {
-        if (!user) return;
-        const response = await axios.get(`/api/professors/${user.id}`);
-        if (response.data.professor.isHOD) {
-          user.isHOD = true;
-        }
-      } catch (error) {
-        console.error('Error fetching professor details', error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchProfessor() {
+  //     try {
+  //       if (!user) return;
+  //       const response = await axios.get(`/api/professors/${user.id}`);
+  //       if (response.data.professor.isHOD) {
+  //         user.isHOD = true;
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching professor details', error);
+  //     }
+  //   }
 
-    if (user?.id) {
-      fetchProfessor();
-    }
-  }, [user]);
+  //   if (user?.id) {
+  //     fetchProfessor();
+  //   }
+  // }, [user]);
 
   const fetchDivision = async () => {
     try {
@@ -190,16 +190,20 @@ const DivisionPage = () => {
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Professors</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {division?.professors.map((prof) => (
-                  <div key={prof.professor.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-md">
-                    <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span className="text-sm font-medium text-gray-900">{prof.professor.name}</span>
+                  <div 
+                  key={prof.professor.id} 
+                  className="flex items-center space-x-3 p-3 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100"
+                  onClick={() => router.push(`/professors/${prof.professor.id}`)}
+                  >
+                  <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span className="text-sm font-medium text-gray-900 hover:text-blue-600">{prof.professor.name}</span>
                   </div>
                 ))}
-              </div>
+                </div>
             </div>
           </div>
         </div>

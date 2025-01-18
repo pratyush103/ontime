@@ -48,7 +48,7 @@ const Navbar = () => {
                   <NavigationMenu.Item>
                     <NavigationMenu.Link asChild>
                       <Link 
-                        href="/divisions" 
+                        href="/division/all" 
                         className={cn(
                           "text-foreground hover:text-primary",
                           "px-3 py-2 rounded-md text-sm font-medium"
@@ -101,7 +101,7 @@ const Navbar = () => {
                 <NavigationMenu.Item>
                   <NavigationMenu.Link asChild>
                     <Link 
-                      href="/login" 
+                      href="/auth/login" 
                       className={cn(
                         "text-foreground hover:text-primary",
                         "px-3 py-2 rounded-md text-sm font-medium"

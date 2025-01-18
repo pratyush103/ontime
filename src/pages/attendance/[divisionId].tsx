@@ -23,24 +23,24 @@ const AttendancePage = () => {
     }
   }, [divisionId]);
 
-  useEffect(() => {
-    async function fetchProfessor() {
-      try {
-        if (!user) {
-          console.error('User is not defined');
-          return;
-        }
-        const response = await axios.get(`/api/professors/${user.id}`);
-        setIsProfessorHod(response.data.professor.isHOD);
-      } catch (error) {
-        console.error('Error fetching professor details', error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchProfessor() {
+  //     try {
+  //       if (!user) {
+  //         console.error('User is not defined');
+  //         return;
+  //       }
+  //       const response = await axios.get(`/api/professors/${user.id}`);
+  //       setIsProfessorHod(response.data.professor.isHOD);
+  //     } catch (error) {
+  //       console.error('Error fetching professor details', error);
+  //     }
+  //   }
 
-    if (user?.id) {
-      fetchProfessor();
-    }
-  }, [user]);
+  //   if (user?.id) {
+  //     fetchProfessor();
+  //   }
+  // }, [user]);
 
   const fetchStudents = async () => {
     try {
