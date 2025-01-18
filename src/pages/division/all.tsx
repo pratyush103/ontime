@@ -16,7 +16,7 @@ const AllDivisionsPage = () => {
     try {
       const response = await axios.get('/api/divisions');
       setDivisions(response.data.divisions);
-      console.log('Divisions:', divisions);
+      response.data.divisions.map(division => console.log('Divisions:',  division.professors));
     } catch (error) {
       console.error('Error fetching divisions', error);
     }
@@ -58,7 +58,7 @@ const AllDivisionsPage = () => {
               <div className="p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">{division.name}</h2>
                 <p className="text-gray-600 mb-4">Number of Students: {division.students.length}</p>
-                {division.professors && division.professors.includes(user.id) ? (
+                {division.professors.some((prof) => prof.professorId === user.id) ? (
                   <p className="text-green-600">You are already a member of this division</p>
                 ) : (
                   <button
