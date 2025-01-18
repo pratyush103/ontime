@@ -56,5 +56,40 @@ npm run dev
 pnpm dev
 ```
 
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Project Details
+
+### Landing Page
+![Landing Page](https://github.com/user-attachments/assets/19372844-475f-4f5a-9675-ea7b7098cd26)
+
+### Login and Register for Professor
+Create Professor accounts and an option to register as a HOD to gain higher privileges and functionalities.
+
+![Login and Register](https://github.com/user-attachments/assets/7e68ce82-7cd1-4add-a356-fd5487e0f1d6)
+![Login and Register](https://github.com/user-attachments/assets/dfcadac0-3972-4c32-9ab1-411b0b84b67a)
+
+### Professor Dashboard
+See all your divisions at a glance.
+
+![Professor Dashboard](https://github.com/user-attachments/assets/8631d778-dc4a-4af9-9b2b-7d44dadae17f)
+
+### Attendance Page
+Take attendance of your students for the day.
+
+![Attendance Page](https://github.com/user-attachments/assets/bfc47722-3038-4dee-8a70-c4e872d927b1)
+
+### Divisions Page
+See details about your division and summary about their monthly attendance.
+
+![Divisions Page](https://github.com/user-attachments/assets/57764fb7-083e-429e-858f-4251b51ed3dd)
+
+### Student Details
+See details about a student and see their monthly attendance report.
+
+![Student Details](https://github.com/user-attachments/assets/c3406fef-1433-4c9e-a916-f05f99c5078a)
+
+
+
 
