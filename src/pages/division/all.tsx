@@ -1,11 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../context/UserContext';
 import { useToast } from '@/components/ui/use-toast';
 
 const AllDivisionsPage = () => {
-  const { user } = useContext(UserContext);
-  const [divisions, setDivisions] = useState([]);
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
+  const [divisions, setDivisions] = useState<Array<{
+    id: string;
+    name: string;
+    students: Array<any>;
+    professors: Array<{ professorId: number }>;
+  }>>([]);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -16,16 +24,16 @@ const AllDivisionsPage = () => {
     try {
       const response = await axios.get('/api/divisions');
       setDivisions(response.data.divisions);
-      response.data.divisions.map(division => console.log('Divisions:',  division.professors));
+      response.data.divisions.map((division: { professors: any; }) => console.log('Divisions:',  division.professors));
     } catch (error) {
       console.error('Error fetching divisions', error);
     }
   };
 
-  const handleJoinDivision = async (divisionId) => {
+  const handleJoinDivision = async (divisionId: string) => {
     try {
       await axios.post('/api/professors/updateDivisions', {
-        professorId: user.id,
+        professorId: user?.id,
         divisionId,
       });
       toast({
@@ -33,7 +41,7 @@ const AllDivisionsPage = () => {
         description: "Joined division successfully",
         variant: "default",
       });
-      fetchDivisions(); // Refresh the divisions list
+      fetchDivisions();
     } catch (error) {
       console.error('Error joining division', error);
       toast({
@@ -58,7 +66,7 @@ const AllDivisionsPage = () => {
               <div className="p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">{division.name}</h2>
                 <p className="text-gray-600 mb-4">Number of Students: {division.students.length}</p>
-                {division.professors.some((prof) => prof.professorId === user.id) ? (
+                {division.professors.some((prof) => prof.professorId === user?.id) ? (
                   <p className="text-green-600">You are already a member of this division</p>
                 ) : (
                   <button
